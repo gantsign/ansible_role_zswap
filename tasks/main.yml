@@ -1,2 +1,36 @@
 ---
-# tasks file for ansible_role_zswap
+- name: enable zswap (insert)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="((?!.*?zswap\.enabled=[01]).*)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1 zswap.enabled=1"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: enable zswap (update)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="(.*?)zswap\.enabled=[01](.*?)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1zswap.enabled=1\2"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: set max_pool_percent (insert)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="((?!.*?zswap\.max_pool_percent=[0-9]+).*)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1 zswap.max_pool_percent={{ zswap_max_pool_percent }}"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: set max_pool_percent (update)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="(.*?)zswap\.max_pool_percent=[0-9]+(.*?)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1zswap.max_pool_percent={{ zswap_max_pool_percent }}\2"'
+    backrefs: yes
+  notify:
+    - update-grub

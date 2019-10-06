@@ -1,5 +1,17 @@
 ---
 - name: Converge
   hosts: all
+
+  pre_tasks:
+    - name: install default grub file
+      become: yes
+      template:
+        src: grub-default
+        dest: /etc/default/grub
+        force: no
+        owner: root
+        group: root
+        mode: 'ug=rw,o=r'
+
   roles:
     - role: ansible_role_zswap

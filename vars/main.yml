@@ -1,2 +1,3 @@
 ---
-# vars file for ansible_role_zswap
+# The location of the grub configuration file.
+zswap_grubfile: /etc/default/grub
