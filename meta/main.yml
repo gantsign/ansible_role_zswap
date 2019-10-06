@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: zswap
-  description: Ansible role for configuring ZSWAP.
+  description: Ansible role for configuring Zswap.
   author: John Freeman
   company: GantSign Ltd.
   license: MIT

@@ -1,4 +1,4 @@
-Ansible Role: ZSWAP
+Ansible Role: Zswap
 ===================
 
 [![Build Status](https://travis-ci.com/gantsign/ansible_role_zswap.svg?branch=master)](https://travis-ci.com/gantsign/ansible_role_zswap)
@@ -6,7 +6,7 @@ Ansible Role: ZSWAP
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible_role_zswap/master/LICENSE)
 
 Role to configure
-[ZSWAP](https://www.kernel.org/doc/Documentation/vm/zswap.txt) a Linux kernel
+[Zswap](https://www.kernel.org/doc/Documentation/vm/zswap.txt) a Linux kernel
 feature that provides a compressed RAM cache for swap pages.
 
 Requirements
@@ -29,7 +29,7 @@ The following variable will change the behavior of this role (the default value
 is shown below):
 
 ```yaml
-# The maximum percentage of RAM to be used for the ZSWAP pool.
+# The maximum percentage of RAM to be used for the Zswap pool.
 zswap_max_pool_percent: 20
 ```
 
