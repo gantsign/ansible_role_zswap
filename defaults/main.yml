@@ -1,2 +1,3 @@
 ---
-# defaults file for ansible_role_zswap
+# The maximum percentage of RAM to be used for the ZSWAP pool.
+zswap_max_pool_percent: 20
