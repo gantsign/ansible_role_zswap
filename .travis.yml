@@ -10,7 +10,7 @@ env:
 matrix:
   include:
     - env:
-        - MOLECULEW_ANSIBLE=2.6.18
+        - MOLECULEW_ANSIBLE=2.7.15
     - env:
         - MOLECULEW_ANSIBLE=2.9.1
 
