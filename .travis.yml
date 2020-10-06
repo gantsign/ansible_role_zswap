@@ -10,7 +10,7 @@ env:
 jobs:
   include:
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
     - env:
         - MOLECULEW_ANSIBLE=2.9.1
 

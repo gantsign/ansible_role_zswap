@@ -12,7 +12,7 @@ feature that provides a compressed RAM cache for swap pages.
 Requirements
 ------------
 
-* Ansible >= 2.7
+* Ansible >= 2.8
 
 * Linux Distribution
 
