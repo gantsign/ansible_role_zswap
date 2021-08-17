@@ -1,7 +1,7 @@
 Ansible Role: Zswap
 ===================
 
-[![Build Status](https://travis-ci.com/gantsign/ansible_role_zswap.svg?branch=master)](https://travis-ci.com/gantsign/ansible_role_zswap)
+[![Tests](https://github.com/gantsign/ansible_role_zswap/workflows/Tests/badge.svg)](https://github.com/gantsign/ansible_role_zswap/actions?query=workflow%3ATests)
 [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.zswap-blue.svg)](https://galaxy.ansible.com/gantsign/zswap)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible_role_zswap/master/LICENSE)
 
