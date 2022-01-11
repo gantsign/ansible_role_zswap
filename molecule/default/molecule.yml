@@ -12,8 +12,10 @@ lint: |
   flake8
 
 platforms:
-  - name: ansible_role_zswap_default
+  - name: ansible_role_zswap_ubuntu_min
     image: ubuntu:18.04
+  - name: ansible_role_zswap_ubuntu_max
+    image: ubuntu:20.04
 
 provisioner:
   name: ansible
