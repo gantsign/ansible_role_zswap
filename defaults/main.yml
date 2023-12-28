@@ -2,3 +2,4 @@
 # The maximum percentage of RAM to be used for the Zswap pool.
 zswap_max_pool_percent: 20
 zswap_compressor: "lz4"
+zswap_zpool: zbud

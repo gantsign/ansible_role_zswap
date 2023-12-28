@@ -52,3 +52,21 @@
     backrefs: yes
   notify:
     - update-grub
+
+- name: set zpool (insert)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="((?!.*?zswap\.zpool=[A-z]+).*)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1 zswap.zpool={{ zswap_zpool }}"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: set zpool (update)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="(.*?)zswap\.zpool=[A-z]+(.*?)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1zswap.zpool={{ zswap_zpool }}\2"'
+    backrefs: yes
+  notify:
+    - update-grub
