@@ -34,3 +34,66 @@
     backrefs: yes
   notify:
     - update-grub
+
+- name: set compressor (insert)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="((?!.*?zswap\.compressor=[a-z0-9]+).*)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1 zswap.compressor={{ zswap_compressor }}"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: set compressor (update)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="(.*?)zswap\.compressor=[0-9]+(.*?)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1zswap.compressor={{ zswap_compressor }}\2"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: set zpool (insert)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="((?!.*?zswap\.zpool=[A-z]+).*)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1 zswap.zpool={{ zswap_zpool }}"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: set zpool (update)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="(.*?)zswap\.zpool=[A-z]+(.*?)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1zswap.zpool={{ zswap_zpool }}\2"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: set accept_threshold_percent (insert)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="((?!.*?zswap\.accept_threshold_percent=[A-z]+).*)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1 zswap.accept_threshold_percent={{ zswap_accept_threshold_percent }}"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: set accept_threshold_percent (update)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="(.*?)zswap\.accept_threshold_percent=[A-z]+(.*?)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1zswap.accept_threshold_percent={{ zswap_accept_threshold_percent }}\2"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: enable zswap right away
+  shell:
+    cmd: |
+      echo {{ zswap_zpool }} > /sys/module/zswap/parameters/zpool;
+      echo {{ zswap_compressor }} > /sys/module/zswap/parameters/compressor;
+      echo {{ zswap_accept_threshold_percent }} > /sys/module/zswap/parameters/accept_threshold_percent;
+      echo 1 > /sys/module/zswap/parameters/enabled;
+  when: not zswap_wait_for_reboot

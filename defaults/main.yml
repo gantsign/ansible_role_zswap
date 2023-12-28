@@ -1,3 +1,11 @@
 ---
+# Control if zswap should be applied right now or on next reboot
+zswap_wait_for_reboot: false
 # The maximum percentage of RAM to be used for the Zswap pool.
 zswap_max_pool_percent: 20
+# The used compression algorithm
+zswap_compressor: "lz4"
+# The type of page storage used, see https://docs.kernel.org/admin-guide/mm/zswap.html
+zswap_zpool: zbud
+# Lower watermark for using zswap again when it filled up
+zswap_accept_threshold_percent: 90
