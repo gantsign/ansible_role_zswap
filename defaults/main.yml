@@ -3,3 +3,4 @@
 zswap_max_pool_percent: 20
 zswap_compressor: "lz4"
 zswap_zpool: zbud
+zswap_accept_threshold_percent: 90
