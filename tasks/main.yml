@@ -88,3 +88,12 @@
     backrefs: yes
   notify:
     - update-grub
+
+- name: enable zswap right away
+  shell:
+    cmd: |
+      echo {{ zswap_zpool }} > /sys/module/zswap/parameters/zpool;
+      echo {{ zswap_compressor }} > /sys/module/zswap/parameters/compressor;
+      echo {{ zswap_accept_threshold_percent }} > /sys/module/zswap/parameters/accept_threshold_percent;
+      echo 1 > /sys/module/zswap/parameters/enabled;
+  when: not zswap_wait_for_reboot
