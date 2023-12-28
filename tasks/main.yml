@@ -34,3 +34,21 @@
     backrefs: yes
   notify:
     - update-grub
+
+- name: set compressor (insert)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="((?!.*?zswap\.compressor=[a-z0-9]+).*)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1 zswap.compressor={{ zswap_compressor }}"'
+    backrefs: yes
+  notify:
+    - update-grub
+
+- name: set compressor (update)
+  lineinfile:
+    path: '{{ zswap_grubfile }}'
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="(.*?)zswap\.compressor=[0-9]+(.*?)"'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="\1zswap.compressor={{ zswap_compressor }}\2"'
+    backrefs: yes
+  notify:
+    - update-grub
